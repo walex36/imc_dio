@@ -28,9 +28,6 @@ enum ImcEnum {
         return 'Obesidade Grau II';
       case ImcEnum.obesidadeGrau3:
         return 'Obesidade Grau III';
-
-      default:
-        throw Exception('imcEnum not found');
     }
   }
 
@@ -52,9 +49,6 @@ enum ImcEnum {
         return Colors.redAccent;
       case ImcEnum.obesidadeGrau3:
         return Colors.red;
-
-      default:
-        return Colors.white;
     }
   }
 
@@ -76,17 +70,14 @@ enum ImcEnum {
         return Icons.sentiment_dissatisfied;
       case ImcEnum.obesidadeGrau3:
         return Icons.sentiment_very_dissatisfied;
-
-      default:
-        return Icons.details_sharp;
     }
   }
 
   factory ImcEnum.fromValueToEnum(double value) {
     if (value < 16) {
-      return ImcEnum.magrezaLeve;
+      return ImcEnum.magrezaGrave;
     } else if (value < 17) {
-      return ImcEnum.magrezaLeve;
+      return ImcEnum.magrezaModerada;
     } else if (value < 18.5) {
       return ImcEnum.magrezaLeve;
     } else if (value < 25) {

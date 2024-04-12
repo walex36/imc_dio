@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:imc_dio/src/domain/entities/pessoa_entity.dart';
-import 'package:imc_dio/src/domain/enum/imc_enum.dart';
 import 'package:imc_dio/src/presentation/controller/imc_controller.dart';
 
 class ImcPage extends StatefulWidget {
@@ -37,6 +36,7 @@ class _ImcPageState extends State<ImcPage> {
               child: Column(
                 children: [
                   TextFormField(
+                    key: const Key('tfName'),
                     controller: _nameController,
                     enabled: !_pessoaValida(),
                     decoration: const InputDecoration(
@@ -53,6 +53,7 @@ class _ImcPageState extends State<ImcPage> {
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
+                    key: const Key('tfHeight'),
                     controller: _alturaController,
                     enabled: !_pessoaValida(),
                     keyboardType: TextInputType.number,
@@ -72,6 +73,7 @@ class _ImcPageState extends State<ImcPage> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    key: const Key('tfWeight'),
                     controller: _pesoController,
                     enabled: !_pessoaValida(),
                     keyboardType: TextInputType.number,
@@ -93,31 +95,8 @@ class _ImcPageState extends State<ImcPage> {
                   SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          if (!_pessoaValida()) {
-                            if (_formKey.currentState!.validate()) {
-                              double altura =
-                                  getDoubleTryParse(_alturaController.text) ??
-                                      0;
-                              double peso =
-                                  getDoubleTryParse(_pesoController.text) ?? 0;
-
-                              _pessoa = _imcController.calculate(
-                                name: _nameController.text,
-                                peso: peso,
-                                altura: altura,
-                              );
-                            }
-                          } else {
-                            _nameController.clear();
-                            _alturaController.clear();
-                            _pesoController.clear();
-                            _pessoa = null;
-                            FocusScope.of(context).requestFocus(FocusNode());
-                          }
-                        });
-                      },
+                      key: const Key('btnCalculate'),
+                      onPressed: _onPressedCalculate,
                       child: Text(_pessoa == null ? 'Calcular' : 'Limpar'),
                     ),
                   ),
@@ -135,11 +114,35 @@ class _ImcPageState extends State<ImcPage> {
     return double.tryParse(value.replaceAll(',', '.'));
   }
 
+  _onPressedCalculate() {
+    setState(() {
+      if (!_pessoaValida()) {
+        if (_formKey.currentState!.validate()) {
+          double altura = getDoubleTryParse(_alturaController.text) ?? 0;
+          double peso = getDoubleTryParse(_pesoController.text) ?? 0;
+
+          _pessoa = _imcController.calculate(
+            name: _nameController.text,
+            peso: peso,
+            altura: altura,
+          );
+        }
+      } else {
+        _nameController.clear();
+        _alturaController.clear();
+        _pesoController.clear();
+        _pessoa = null;
+        FocusScope.of(context).requestFocus(FocusNode());
+      }
+    });
+  }
+
   _buildResult() {
     final pessoa = _pessoa!;
     return Expanded(
       child: Center(
         child: Card(
+          key: const Key('cardResult'),
           color: pessoa.imcEnum!.color,
           child: Padding(
             padding: const EdgeInsets.all(16.0),

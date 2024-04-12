@@ -13,7 +13,7 @@ class Pessoa {
     this.imcEnum,
   });
 
-  double get imc => peso / (altura * altura);
+  double get imc => double.parse((peso / (altura * altura)).toStringAsFixed(2));
 
   Pessoa copyWith({
     String? nome,
@@ -27,5 +27,12 @@ class Pessoa {
       altura: altura ?? this.altura,
       imcEnum: imcEnum ?? this.imcEnum,
     );
+  }
+
+  bool equals(Pessoa pessoa) {
+    return nome == pessoa.nome &&
+        peso == pessoa.peso &&
+        altura == pessoa.altura &&
+        imcEnum == pessoa.imcEnum;
   }
 }
