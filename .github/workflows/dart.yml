@@ -29,12 +29,22 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.16.9
-      - uses: futureware-tech/simulator-action@v3
+      - uses: actions/setup-java@v4
         with:
-          model: 'iPhone 14'
-      
-      - name: Install rosetta and agree to license
-        run: softwareupdate --install-rosetta --agree-to-license
+          distribution: 'microsoft'
+          java-version: '21'
+          
+       # Download & install the Android SDK.
+      - uses: malinskiy/action-android/install-sdk@release/0.1.6
+
+      # Set up platform tools like adb.
+      - run: sdkmanager platform-tools
+
+      # Start ADB (and verify that pathing is working correctly).
+      - run: adb devices
+
+      # Verify $ANDROID_HOME is properly set for later Gradle commands.
+      - run: echo $ANDROID_HOME
 
       - name: Install dependencies
         run: dart pub get
