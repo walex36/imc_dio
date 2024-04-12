@@ -4,7 +4,7 @@ import 'package:imc_dio/src/domain/enum/imc_enum.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:imc_dio/main.dart' as app;
 
-import '../../../../test/mock/pessoa_mock.dart';
+import '../test/mock/pessoa_mock.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

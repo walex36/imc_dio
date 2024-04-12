@@ -31,7 +31,7 @@ jobs:
           flutter-version: 3.16.9
       - uses: futureware-tech/simulator-action@v3
         with:
-          model: 'iPhone 14'
+          model: 'iPhone 15'
 
       - name: Install dependencies
         run: dart pub get
