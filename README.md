@@ -1,16 +1,6 @@
-# imc_dio
+[![codecov](https://codecov.io/gh/walex36/imc_dio/graph/badge.svg?token=A76CSBOMJ8)](https://codecov.io/gh/walex36/imc_dio)
+## IMC DIO
 
-A new Flutter project.
+Este app tem a finalidade de calcular o Índice de massa corporal (IMC)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Objetivo:** Criar testes de unidade, widgets e integração
